@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CreateParentDataRequest;
+use App\parentModel;
 
 use Illuminate\Http\Request;
 
@@ -21,5 +23,28 @@ class ParentController extends Controller
     public function addParent()
     {
         return view('addParent');
+    }
+
+    public function createParent(CreateParentDataRequest $request)
+    {
+        $data = [
+            'firstname' => $request->input('inputFirstName'),
+            'lastname' => $request->input('inputLastName'),
+            'nic' => $request->input('inputNIC'),
+            'addressline1' => $request->input('inputAddressLine1'),
+            'addressline2' => $request->input('inputAddressLine2'),
+            'city' => $request->input('inputCity'),
+            'province' => $request->input('inputProvince'),
+            'country' => $request->input('inputCountry'),
+            'email' => $request->input('inputEmail'),
+            'contactno' => $request->input('inputContactNo'),
+            'mobileno' => $request->input('inputMobileNo'),            
+            'status' => "1",
+        ];
+
+        parentModel::create($data);
+        //return back()->with('success','Successfully registered a new student!');
+        //return redirect('/addParent');
+        return redirect()->route('parent.index')->with('success', 'Data has been inserted successfully.');
     }
 }
