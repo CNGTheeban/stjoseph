@@ -19,7 +19,7 @@ use App\Http\Controllers\PayController;
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('index');   
 });
 
 Route::get('/register', [RegisterController::class, 'index']);
